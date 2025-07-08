@@ -744,51 +744,42 @@ const CinematicPortfolio: React.FC = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="text-white hover:bg-red-900/20 hover:text-white border border-red-500/20 backdrop-blur-sm transition-all duration-500"
-              >
-                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            >
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsMuted(!isMuted)}
-                className="text-white hover:bg-red-900/20 hover:text-white border border-red-500/20 backdrop-blur-sm transition-all duration-500"
-              >
-                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-              </Button>
-            </motion.div>
-          </motion.div>
-        </header>
-
-        {/* Hero Section */}
-        <main className="flex-1 flex flex-col justify-center items-center px-8 text-center min-h-screen relative">
-          <div className="w-full max-w-6xl mx-auto">
-            <ScrollAnimation direction="down" className="mb-12">
-              <motion.div
-                className="text-7xl md:text-9xl font-thin mb-8 tracking-tight"
-                onHoverStart={() => setHoveredName(true)}
-                onHoverEnd={() => setHoveredName(false)}
-              >
-                <span className="block text-gray-400 text-2xl md:text-3xl font-light mb-4 tracking-[0.3em]">
-                  MY NAME IS
-                </span>
-                {hoveredName ? (
-                  <GlitchText 
-                    text="VISHNU ADARI" 
-                    className="text-7xl md:text-9xl font-thin"
-                    colors={{
-                      red: "#ff3333",
-                      green: "#cc0000", 
-                      blue: "#990000"
-                    }}
-                  />
+                  {/* Video Container */}
+                  <video
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster="/video-poster.jpg"
+                  >
+                    <source src="/reel-video.mp4" type="video/mp4" />
+                    {/* Fallback for when video doesn't load */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900 via-pink-800 to-red-900">
+                      <div className="text-center text-white">
+                        <motion.div
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                          className="mb-4"
+                        >
+                          <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <Play className="w-8 h-8 text-white ml-1" />
+                          </div>
+                        </motion.div>
+                        <p className="text-lg font-semibold mb-2">Video Loading...</p>
+                        <p className="text-sm text-white/80 px-4">
+                          Add reel-video.mp4 to /public/ folder
+                        </p>
+                      </div>
+                    </div>
+                  </video>
                 ) : (
                   <motion.span
                     className="inline-block"
