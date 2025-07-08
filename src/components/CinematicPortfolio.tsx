@@ -1271,33 +1271,69 @@ const CinematicPortfolio: React.FC = () => {
                       <div className="relative">
                         {/* Phone Frame */}
                         <div className="relative w-64 h-[500px] bg-black rounded-[2.5rem] border-4 border-gray-800 shadow-2xl overflow-hidden">
-                          {/* Status Bar */}
-                          <div className="absolute top-0 left-0 right-0 h-8 bg-black/90 flex items-center justify-between px-6 text-white text-xs">
-                            <span>10:34</span>
-                            <div className="flex items-center gap-1">
-                              <div className="w-4 h-2 border border-white rounded-sm">
-                                <div className="w-3 h-1 bg-white rounded-sm m-0.5" />
+                          <div className="absolute inset-0 bg-black rounded-[2.5rem] overflow-hidden">
+                            {/* Status Bar */}
+                            <div className="flex justify-between items-center px-6 py-2 text-white text-sm font-medium bg-black/50 backdrop-blur-sm">
+                              <span>10:34</span>
+                              <div className="flex items-center gap-1">
+                                <div className="flex gap-1">
+                                  <div className="w-1 h-3 bg-white rounded-full"></div>
+                                  <div className="w-1 h-3 bg-white rounded-full"></div>
+                                  <div className="w-1 h-3 bg-white/60 rounded-full"></div>
+                                  <div className="w-1 h-3 bg-white/40 rounded-full"></div>
+                                </div>
+                                <span className="ml-2">100%</span>
                               </div>
-                              <span>100%</span>
                             </div>
-                          </div>
 
-                          {/* Video Content Area */}
-                          <div className="absolute top-8 left-0 right-0 bottom-20 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 flex items-center justify-center">
-                            {/* Simulated Video Content */}
-                            <motion.div
-                              className="w-full h-full bg-gradient-to-br from-red-900/20 to-red-600/20 flex flex-col items-center justify-center relative overflow-hidden"
-                              animate={{
-                                background: [
-                                  "linear-gradient(135deg, rgba(153,27,27,0.2) 0%, rgba(220,38,38,0.2) 100%)",
-                                  "linear-gradient(135deg, rgba(220,38,38,0.2) 0%, rgba(239,68,68,0.2) 100%)",
-                                  "linear-gradient(135deg, rgba(153,27,27,0.2) 0%, rgba(220,38,38,0.2) 100%)"
-                                ]
-                              }}
-                              transition={{ duration: 3, repeat: Infinity }}
-                            >
-                              {/* Profile Info */}
-                              <div className="absolute bottom-4 left-4 right-4">
+                            {/* Video Content */}
+                            <div className="relative h-full">
+                              <video 
+                                src="https://drive.google.com/uc?export=download&id=1WkYBmMiy1tbBBeQmIHw-NCfB5FtMzXY2"
+                                className="w-full h-full object-cover"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                onError={(e) => {
+                                  // Fallback to embedded iframe if direct download fails
+                                  const video = e.target as HTMLVideoElement;
+                                  const container = video.parentElement;
+                                  if (container) {
+                                    container.innerHTML = `
+                                      <iframe 
+                                        src="https://drive.google.com/file/d/1WkYBmMiy1tbBBeQmIHw-NCfB5FtMzXY2/preview"
+                                        className="w-full h-full border-0"
+                                        allow="autoplay"
+                                      ></iframe>
+                                    `;
+                                  }
+                                }}
+                              />
+                              
+                              {/* Right Side Actions */}
+                              <div className="absolute right-4 bottom-32 flex flex-col gap-6">
+                                {[
+                                  { icon: "♥", count: "2.1K" },
+                                  { icon: "💬", count: "89" },
+                                  { icon: "↗", count: "Share" }
+                                ].map((item, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="flex flex-col items-center gap-1"
+                                    whileHover={{ scale: 1.1 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <div className="w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white text-lg backdrop-blur-sm">
+                                      {item.icon}
+                                    </div>
+                                    <span className="text-white text-xs">{item.count}</span>
+                                  </motion.div>
+                                ))}
+                              </div>
+
+                              {/* Bottom Profile Info */}
+                              <div className="absolute bottom-4 left-4 right-16">
                                 <div className="flex items-center gap-3 mb-2">
                                   <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
                                     <span className="text-white text-xs font-bold">VA</span>
@@ -1308,65 +1344,22 @@ const CinematicPortfolio: React.FC = () => {
                                   Crafting visual stories that captivate in seconds ✨
                                 </p>
                               </div>
+                            </div>
 
-                              {/* Floating Elements */}
-                              {Array.from({ length: 3 }).map((_, i) => (
-                                <motion.div
-                                  key={i}
-                                  className="absolute w-2 h-2 bg-white/30 rounded-full"
-                                  style={{
-                                    left: `${20 + i * 30}%`,
-                                    top: `${30 + i * 20}%`,
-                                  }}
-                                  animate={{
-                                    y: [0, -20, 0],
-                                    opacity: [0.3, 0.8, 0.3],
-                                    scale: [1, 1.2, 1]
-                                  }}
-                                  transition={{
-                                    duration: 2 + i * 0.5,
-                                    repeat: Infinity,
-                                    delay: i * 0.3
-                                  }}
-                                />
-                              ))}
-                            </motion.div>
-                          </div>
-
-                          {/* Side Buttons */}
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-6">
-                            {[
-                              { icon: "♥", count: "2.1K" },
-                              { icon: "💬", count: "89" },
-                              { icon: "↗", count: "Share" }
-                            ].map((item, i) => (
-                              <motion.div
-                                key={i}
-                                className="flex flex-col items-center gap-1"
-                                whileHover={{ scale: 1.1 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                <div className="w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white text-lg backdrop-blur-sm">
-                                  {item.icon}
-                                </div>
-                                <span className="text-white text-xs">{item.count}</span>
-                              </motion.div>
-                            ))}
-                          </div>
-
-                          {/* Bottom Navigation */}
-                          <div className="absolute bottom-0 left-0 right-0 h-20 bg-black/90 flex items-center justify-center">
-                            <div className="flex items-center gap-8">
-                              {["🏠", "🔍", "➕", "💬", "👤"].map((emoji, i) => (
-                                <motion.div
-                                  key={i}
-                                  className="text-white text-xl"
-                                  whileHover={{ scale: 1.2 }}
-                                  transition={{ duration: 0.2 }}
-                                >
-                                  {emoji}
-                                </motion.div>
-                              ))}
+                            {/* Bottom Navigation */}
+                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-black/90 flex items-center justify-center">
+                              <div className="flex items-center gap-8">
+                                {["🏠", "🔍", "➕", "💬", "👤"].map((emoji, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="text-white text-xl"
+                                    whileHover={{ scale: 1.2 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    {emoji}
+                                  </motion.div>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
