@@ -1,8 +1,8 @@
 import React from 'react';
-import CinematicPortfolio from './components/CinematicPortfolio';
+import PortfolioNavBarDemo from './components/PortfolioNavBar';
 
 function App() {
-  return <CinematicPortfolio />;
+  return <PortfolioNavBarDemo />;
 }
 
 export default App;
